@@ -5,10 +5,9 @@ package com.example.sho.myportalapp.googleNewsApi
  *
  * Created by sho on 2018/03/26.
  */
-public class TabNameSources {
+class TabNameSources {
 
     companion object {
-        val tabNameList = mutableListOf("転職", "リゾートホテル", "渋谷 ランチ", "芸能",
-                "ホリエモン")
+        val tabNameList = mutableListOf("タピオカ", "ゴンチャ")
     }
 }

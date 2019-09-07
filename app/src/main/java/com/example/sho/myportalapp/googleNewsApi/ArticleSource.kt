@@ -19,6 +19,5 @@ data class ArticleSource(
             return Uri.parse(this)
         }
         return null
-
     }
 }

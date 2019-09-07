@@ -50,13 +50,13 @@ class CardContentFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var targetTabName = arguments.getString("TAB_NAME")
-        val itemList = fetchData(targetTabName)
+        val targetTabName = arguments.getString("TAB_NAME")
+        val data = fetchData(targetTabName)
         val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecoration.setDrawable(context.getDrawable(R.drawable.divider))
         with(view) {
             recyclerView = this!!.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
-                adapter = NewsRecyclerAdapter(context, itemList)
+                adapter = NewsRecyclerAdapter(context, data)
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 addItemDecoration(itemDecoration)
@@ -69,6 +69,7 @@ class CardContentFragment : Fragment() {
      */
     private fun fetchData(tabName: String): ArrayList<ArticleSource> {
         val service = GoogleNewsService.createService().addQuery(tabName, "popularity", 100)
+        Log.d("ushi", service.toString())
         var arrayList = ArrayList<ArticleSource>()
         val item = object : Callback<GoogleNewsSources> {
             /**
@@ -77,6 +78,7 @@ class CardContentFragment : Fragment() {
              */
             override fun onFailure(call: Call<GoogleNewsSources>?, t: Throwable?) {
                 Log.d("ushiTest", t.toString())
+                Log.d("ushi2", "hoge2")
             }
 
             /**
@@ -87,6 +89,7 @@ class CardContentFragment : Fragment() {
              * Call [Response.isSuccessful] to determine if the response indicates success.
              */
             override fun onResponse(call: Call<GoogleNewsSources>?, response: Response<GoogleNewsSources>?) {
+                Log.d("ushi2", "hoge")
                 Log.d("ushiTest", "onResponseが返されました body:" + response?.body())
 
                 response?.body()?.articles?.forEach { arrayList.add(it) }
